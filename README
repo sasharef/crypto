@@ -1,3 +1,36 @@
-/* README file: sasharef .git
-This is a study project to learn encrypting and so on
-*/
+ Crypto -- encryption by which units of plaintext are replaced with ciphertext according to a regular system               ===============================================================================
+
+ The program is created as a task 1 for a Coputer sequrity course.
+ May the force be with me.
+
+ INSTALLATION
+==============
+
+ To install Crypto from source, please refer to the INSTALL file.
+
+
+ REPORTING BUGS
+================
+
+ Please use at sasharef@gmail.com to report bugs you might
+find.
+
+
+ CONTRIBUTING
+==============
+
+ The source codes for Yaposhiga are hosted by Gitorious. See project page at
+http://github.com/sasharef/crypto for details.
+
+ To contribute to the source codes, use Github interface to clone the
+crypto.git repository, commit your work to the new repository, then create a
+merge request.
+
+ Alternatively, you can clone our repository and send your patches to our
+mailing list at sasharef@gmail.com.
+
+
+ LINKS
+=======
+http://github.com/sasharef/crypto
+

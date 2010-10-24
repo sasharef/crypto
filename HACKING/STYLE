@@ -1,0 +1,176 @@
+ crypto source code guidelines                         ===============================================================================
+                                   It is more important to agree upon an order,
+                                               than which order is agreed upon.
+                                                   -- Danny Cohen, IETF IEN 137
+
+ It is important to accept a consistent style for the code throughout the
+project for its better readability, grepability and other -abilities. It is
+also important to achieve uniformity on other code-related issues, like the
+usage of include guards and copyright declarations.
+
+ This document contains arbitrary style guidelines accepted for Yaposhiga C
+source code. Please follow it in your Yaposhiga code!
+
+ If this document does not cover a style issue, or is unclear or ambiguous,
+please refer to the actual Yaposhiga code.
+
+ This document also contains sample configuration variables and arguments for
+various text editors and automatic code styling utilities.
+
+ The style described in this document is largely based on Amarok coding style
+and Google C++ Style Guide.
+
+ May the Force be with you.
+
+ BASIC FORMATTING
+==================
+
+ * Every code block in a compound statement or compound type definition must be
+   indented with 4 (four) spaces (hex character 0x20).
+ * Opening and closing curly brackets must rest in the first positions on the
+   line before the indentation.
+ * Single statement blocks should omit the curly braces.
+ * Lines should be shorter than 80 characters. Longer lines should be split by
+   the 80-character boundary in small chunks, aligned to function argument list
+   start, literal string start, or similar entity in the full line. Split
+   points should not hinder readability of the code.
+ * Opening round and square brackets must immediately follow the keyword or
+   identifier.
+ * Content of round and square brackets must be separated from the brackets by
+   one space at each end, except for simplest expressions like sleep(1),
+   for(;;), argv[0], etcetera.
+ * Unary operators, including & and * should be immediately followed or
+   preceeded by their argument.
+ * Binary operators should be separated from their arguments. This may be bent
+   in complex expressions to make them look less stupid.
+ * Asterisk (*) in pointer declarations must be separated from the type name
+   by a single space and immediately followed by the identifier name (if any).
+
+ Example of properly formatted indentation:
+int main( int argc, char *argv[] )
+{
+    for(;;)
+        printf( "An unneccessarily long format string with %s and for some "
+                " unclear reason, %d.", argv[0], argc + 7 );
+    return 0;
+}
+
+
+ COMMENTS
+==========
+
+ * Functions and structures should be commented in a Doxygen style (see
+   [doxygen]).
+ * Function commentary should describe the purpose of the function, arguments
+   it expects, possible return values and their meanings, corner cases, memory
+   allocation policy, thread safety, reentrability, etcetera.
+ * Structure commentary should describe the purpose of the structure, meanings
+   of its members, possible values of the members, etcetera.
+ * Non-trivial code should be commented.
+ * Code commentary should explain not what the code does, but why it does that.
+ * Exceptionally complex code should be removed and replaced by simpler one.
+ * Commented-out code should not appear in Yaposhiga repository. If you want
+   to delete code, just delete it, we can always recover it if needed.
+
+
+ COPYRIGHT NOTICES
+===================
+
+ * Every source file must contain author names, e-mail addresses and years of
+   contribution on top of the file, followed by a short copyright statement.
+ * Years of contribution should be spelled out in full, without ranges (i.e.
+   "Copyright 2010, 2011, 2012 James Hacker <james.r@hacker.name>" instead of
+   "Copyright 2010-2012 James Hacker <james.r@hacker.name>").
+ * Copyright statement must exactly repeat the one in the example below.
+ * "(c)" and "(C)" may not be used instead of the word "Copyright".
+ * "(c)" or "(C)" may be used along with the word "Copyright", but they still
+   hold no legal meaning.
+ * Include guards must follow the copyright notice header.
+
+ Example of proper copyright notice:
+/**
+ * @file   toaster.c
+ * @brief  toasts bread
+ * Contains function implementation and internal structures for
+ * core bread toasting functionality.
+ *
+ * @internal
+ * Copyright 2010 James Hacker <james@hacker.com>
+ * Copyright 2010,2011 John Doe <john@example.com>
+ *
+ * This file is part of Yaposhiga.
+ *
+ * Yaposhiga is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Yaposhiga is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * See the full text of the GNU General Public License in the COPYING
+ * file in source code directory.
+ *
+ * If you are unable to read that file, see <http://www.gnu.org/licenses/>.
+ */
+
+See HACKING/template.c for a template.
+
+
+ INCLUDE FILES
+===============
+
+ * #include directives must appear at the top of source file in sections as
+   follows:
+   - system and libc headers,
+   - glib headers,
+   - other libraries headers,
+   - other Yaposhiga headers,
+   - own header (i.e. "toaster.h" in file toaster.c).
+ * Headers in each section must be sorted alphabetically.
+ * Non-empty sections must be separated by a blank line.
+ * Header files must include a unique ifndef/define include guard (see
+   example).
+
+ Example of proper include file:
+#ifndef TOASTER_H
+#define TOASTER_H
+
+#include <stdlib.h>
+#include <string.h>
+
+#include <glib.h>
+#include <gmodule.h>
+
+#include "yaposhiga.h"
+
+void toast( char *what );
+
+#endif
+
+
+ CONFIGURATION FILES AND PARAMETERS
+====================================
+
+ Sample .vimrc:
+set shiftwidth=4
+set tabstop=4
+set expandtab
+set smartindent
+set nowrap
+set textwidth=79
+
+ Parameters for GNU indent:
+-bl -blf -bli0 -npcs -nsaf -nsai -nsaw -prs -di2 -nbc -npsl -bls -ts4
+
+ Parameters for astyle:
+-s4 -b -c -p -D -U -o -O
+
+
+ REFERENCES
+============
+
+[doxygen] Doxygen manual: Documenting the code
+          http://www.stack.nl/~dimitri/doxygen/docblocks.html
